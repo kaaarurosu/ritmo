@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Organiza tus tareas, proyectos y prioridades con Ritmo.">
+  <meta name="theme-color" content="#f8f8fc">
+  <title>Ritmo · Tu espacio de tareas</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="views.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Menú principal">
+      <div class="brand"><span class="brand-icon" data-icon="brand"></span><div>ritmo<span>ESPACIO PERSONAL</span></div></div>
+      <button class="primary sidebar-add" data-action="add"><span data-icon="plus"></span>Nueva tarea<kbd>N</kbd></button>
+      <button class="search-button" data-view="search"><span data-icon="search"></span>Buscar tareas<kbd>/</kbd></button>
+      <div class="nav-label">ESPACIO DE TRABAJO</div>
+      <nav id="navigation" aria-label="Vistas de tareas"></nav>
+      <div class="nav-label project-heading">MIS PROYECTOS<button class="icon-button" data-action="project" aria-label="Crear proyecto" title="Crear proyecto"><span data-icon="plus"></span></button></div>
+      <nav id="projects" aria-label="Proyectos"></nav>
+      <div class="sidebar-footer"><div class="avatar" aria-hidden="true">R</div><div><strong>Mi espacio</strong><span>Guardado en este navegador</span></div></div>
+    </aside>
+    <button class="shade" data-action="menu" aria-label="Cerrar menú" hidden></button>
+    <div class="workspace">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" data-action="menu" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false"><span data-icon="menu"></span></button>
+        <div class="breadcrumb"><span data-icon="grid"></span><span>Mi espacio</span><span data-icon="chevronRight"></span><strong id="breadcrumb"></strong></div>
+        <div class="top-actions">
+        <button class="secondary format-button" id="format-button" popovertarget="view-settings"><span data-icon="sliders"></span><span>Formato</span></button>
+        <button class="secondary top-add" data-action="add"><span data-icon="plus"></span>Añadir tarea</button>
+        </div>
+        <section class="view-settings" id="view-settings" popover aria-label="Configuración de vista"></section>
+      </header>
+      <main class="content">
+        <section class="intro" id="intro"></section>
+        <div class="columns">
+          <section class="task-panel" id="tasks" aria-label="Tareas"></section>
+          <aside class="overview" aria-label="Resumen de hoy">
+            <div class="summary-card" id="summary"></div>
+            <div class="projects-card" id="project-summary"></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+  <dialog id="task-dialog">
+    <form id="task-form">
+      <div class="dialog-heading"><h2 id="task-dialog-title">Nueva tarea</h2><button class="icon-button" type="button" data-action="close" aria-label="Cerrar"><span data-icon="close"></span></button></div>
+      <label>Nombre<input name="title" placeholder="¿Qué necesitas hacer?" maxlength="160" required autofocus></label>
+      <label>Descripción <small>Opcional</small><textarea name="description" placeholder="Añade un poco de contexto…" maxlength="1000" rows="3"></textarea></label>
+      <div class="form-grid">
+        <label>Fecha<input name="date" type="date"></label>
+        <label>Prioridad<select name="priority"><option value="1">Alta</option><option value="2">Media</option><option value="3">Baja</option><option value="4">Sin prioridad</option></select></label>
+        <label>Proyecto<select name="project"></select></label>
+      </div>
+      <label id="task-section-field" hidden>Sección<select name="section"></select></label>
+      <div class="dialog-footer"><button class="danger" type="button" data-action="delete" hidden>Eliminar</button><button class="secondary" type="button" data-action="close">Cancelar</button><button class="primary" type="submit">Guardar tarea</button></div>
+    </form>
+  </dialog>
+  <dialog id="project-dialog">
+    <form id="project-form">
+      <div class="dialog-heading"><h2>Nuevo proyecto</h2><button class="icon-button" type="button" data-action="close" aria-label="Cerrar"><span data-icon="close"></span></button></div>
+      <label>Nombre<input name="name" placeholder="Por ejemplo, Lecturas" maxlength="48" required autofocus></label>
+      <label>Color<select name="color"><option value="violet">Violeta</option><option value="green">Verde</option><option value="orange">Naranja</option><option value="blue">Azul</option><option value="pink">Rosa</option></select></label>
+      <div class="dialog-footer"><button class="secondary" type="button" data-action="close">Cancelar</button><button class="primary" type="submit">Crear proyecto</button></div>
+    </form>
+  </dialog>
+  <dialog id="section-dialog">
+    <form id="section-form">
+      <div class="dialog-heading"><h2>Nueva sección</h2><button class="icon-button" type="button" data-action="close" aria-label="Cerrar"><span data-icon="close"></span></button></div>
+      <p class="section-scope" id="section-scope"></p>
+      <label>Nombre<input name="name" placeholder="Pendientes, Realizando, Finalizado…" maxlength="48" required autofocus></label>
+      <div class="dialog-footer"><button class="secondary" type="button" data-action="close">Cancelar</button><button class="primary" type="submit">Crear sección</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" hidden><span id="toast-message"></span><button class="toast-undo" data-action="undo" hidden>Deshacer</button><button class="icon-button" data-action="dismiss" aria-label="Cerrar aviso"><span data-icon="close"></span></button></div>
+</body>
+</html>
