@@ -7,10 +7,28 @@
   <meta name="theme-color" content="#f8f8fc">
   <title>Ritmo · Tu espacio de tareas</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="auth.js" defer></script>
   <script src="views.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
+  <section class="auth-screen" id="auth-screen" aria-labelledby="auth-title">
+    <div class="auth-card">
+      <div class="auth-brand"><span class="brand-icon" data-icon="brand"></span><div>ritmo<span>ESPACIO PERSONAL</span></div></div>
+      <h1 id="auth-title">Tu espacio para avanzar</h1>
+      <p class="auth-subtitle">Organiza tus tareas y accede a ellas desde cualquier lugar.</p>
+      <button class="google-button" id="google-login" type="button"><span class="google-mark">G</span>Continuar con Google</button>
+      <div class="auth-divider"><span>o con tu correo</span></div>
+      <form id="auth-form">
+        <label>Correo electrónico<input name="email" type="email" autocomplete="email" placeholder="tu@correo.com" required></label>
+        <label>Contraseña<input name="password" type="password" autocomplete="current-password" placeholder="Mínimo 6 caracteres" minlength="6" required></label>
+        <button class="primary auth-submit" type="submit">Iniciar sesión</button>
+      </form>
+      <button class="auth-switch" id="auth-switch" type="button">¿No tienes cuenta? Crear una</button>
+      <p class="auth-message" id="auth-message" role="status"></p>
+    </div>
+  </section>
   <div class="app">
     <aside class="sidebar" id="sidebar" aria-label="Menú principal">
       <div class="brand"><span class="brand-icon" data-icon="brand"></span><div>ritmo<span>ESPACIO PERSONAL</span></div></div>
@@ -20,7 +38,7 @@
       <nav id="navigation" aria-label="Vistas de tareas"></nav>
       <div class="nav-label project-heading">MIS PROYECTOS<button class="icon-button" data-action="project" aria-label="Crear proyecto" title="Crear proyecto"><span data-icon="plus"></span></button></div>
       <nav id="projects" aria-label="Proyectos"></nav>
-      <div class="sidebar-footer"><div class="avatar" aria-hidden="true">R</div><div><strong>Mi espacio</strong><span>Guardado en este navegador</span></div></div>
+      <div class="sidebar-footer"><div class="avatar" id="user-avatar" aria-hidden="true">R</div><div><strong id="user-name">Mi espacio</strong><span id="user-email">Sesión activa</span></div><button class="icon-button" id="logout" type="button" title="Cerrar sesión" aria-label="Cerrar sesión">↪</button></div>
     </aside>
     <button class="shade" data-action="menu" aria-label="Cerrar menú" hidden></button>
     <div class="workspace">
